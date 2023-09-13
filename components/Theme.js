@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { changeColorThemeAction } from "../redux/actions/userAction";
 
 function Theme() {
 
     const [theme, setTheme] = useState(null);
     const themeRef = useRef();
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -29,6 +32,7 @@ function Theme() {
         localStorage.setItem('theme', newTheme);
         document.documentElement.classList.toggle('dark');
         setTheme(newTheme);
+        dispatch(changeColorThemeAction(newTheme))
     }
 
     return (

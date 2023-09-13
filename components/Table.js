@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 
 function TableContainer({ className, children }) {
     return (
-        <div className={`w-full max-h-[calc(100vh_-_13rem)] overflow-auto border-b-2 border-primary ${className}`}>
+        <div className={`w-full max-h-[calc(100vh_-_13rem)] overflow-auto ${className}`}>
             {children}
         </div>
     );
@@ -10,42 +10,44 @@ function TableContainer({ className, children }) {
 
 function Table({ className, children }) {
     return (
-        <table className={`w-full border-collapse px-2 ${className}`}>
+        <table className={`w-full border-collapse ${className}`}>
             {children}
         </table>
     );
 }
 
 function TableHead({ className, children }) {
-    return (<thead className={`bg-slate-50 ${className}`}>{children}</thead>);
+    return (<thead className={className}>{children}</thead>);
 }
 
 function TableBody({ className, children }) {
     return (<tbody className={`overflow-auto ${className}`}>{children}</tbody>);
 }
 
-function TableRow({ className, children }) {
+function TableRow({ className, children, onClick }) {
     return (
-        <tr className={className}>
+        <tr className={className} onClick={onClick}>
             {children}
         </tr>
     );
 }
 
-function TableCell({ component = 'td', style, className, children }) {
+function TableCell({ component = 'td', style, className, children, comparable = true }) {
     return component === 'td'
-        ? (<td style={style} className={`text-gray-800 dark:text-gray-300 px-2 py-3 ${className}`}>{children}</td>)
-        : (<th className={`w-auto h-auto sticky top-0 text-gray-800 dark:text-gray-300 bg-white/75 dark:bg-slate-800/80 backdrop-blur dark:backdrop-blur-0 p-1 whitespace-nowrap cursor-pointer ${className}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline-block text-primary" onClick={e => { console.log(e.target); }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-            </svg>
+        ? (<td style={style} className={`text-gray-800 dark:text-gray-300 px-2 py-2 whitespace-nowrap ${className}`}>{children}</td>)
+        : (<th className={`w-auto h-auto sticky top-0 text-gray-800 dark:text-gray-300 bg-white/75 dark:bg-slate-700/80 dark:backdrop-blur-0 p-1 whitespace-nowrap cursor-pointer ${className}`}>
+            {comparable && (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline-block text-primary" onClick={e => { console.log(e.target); }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                </svg>)}
             {children}
         </th>);
 }
 
-function TablePagination({ }) {
+function TablePagination({ rows, defaultRowsPerPage = 10, rowsPerPage = [10, 20, 50] }) {
 
-    const [pagination, setPagination] = useState(10);
+    const [length] = useState(rows)
+    const [pagination, setPagination] = useState(defaultRowsPerPage);
     const paginationRef = useRef();
 
     const showPageList = e => {

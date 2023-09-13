@@ -8,7 +8,10 @@
     /* --color-primary: 130 113 228; */
     /* --color-primary: 251 146 60; */
     --color-primary: 249 115 22;
-    --color-secondary: 253 186 116;
+    /* --color-secondary: rgb(253 186 116); */
+    --color-secondary: rgb(98 45 9);
+    --bgcolor-dark: rgb(15 23 42);
+    --toast-bgcolor-dark: rgb(51 65 85);
     --percent: calc(var(--rating) / 5 * 100%)
       /* --color-secondary: rgb(111 114 185); */
       /* ... */
@@ -31,6 +34,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -198,6 +202,23 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   appearance: textfield;
   -moz-appearance: textfield;
+}
+
+.rtl {
+  direction: rtl !important;
+}
+
+.ltr {
+  direction: ltr !important;
+}
+
+.Toastify__toast-theme--dark{
+  background-color: var(--toast-bgcolor-dark) !important;
+  border: 1px solid var(--color-secondary);
+}
+
+.Toastify__toast-body {
+  font-family: 'IRANSans';
 }
 
 @media (prefers-color-scheme: dark) {

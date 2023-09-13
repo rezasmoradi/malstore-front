@@ -1,19 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false,
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  experimental: {
-    swcPlugins: [
-      [
-        'next-superjson-plugin',
-        {
-          excluded: [],
-        },
-      ],
-    ],
   },
 }
 

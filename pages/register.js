@@ -175,9 +175,9 @@ function Register() {
                     1401
                 </p>
             </div>
-            <Modal open={openModal}>
+            <Modal open={openModal} onClose={() => { setOpenModal(false); }}>
                 <div className="w-full h-auto mt-4">
-                    <p className="w-fit mx-auto px-4 py-2 ltr text-center text-lg tracking-wide rounded font-bold text-gray-900 my-8 bg-slate-200">{email}</p>
+                    <p className="w-fit mx-auto px-4 py-2 ltr text-center border border-primary text-lg tracking-wide rounded font-bold text-gray-900 my-8 bg-slate-100">{email}</p>
                     <p className="text-center font-medium text-gray-900">آیا ایمیل وارد شده مورد تأیید است؟</p>
                     <div className="w-full h-auto my-8 flex justify-around items-center">
                         <button onClick={submit} className="w-24 h-10 font-medium text-gray-900 border border-slate-400 rounded">

@@ -1,8 +1,8 @@
 import React from "react";
-import UserPanelDrawer from "../components/UserPanelDrawer";
-import UserHeader from '../components/UserHeader';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '../components/Table';
-import TextField from '../components/TextField';
+import UserPanelDrawer from "../../../components/UserPanelDrawer";
+import UserHeader from '../../../components/UserHeader';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '../../../components/Table';
+import TextField from '../../../components/TextField';
 
 function Payments() {
 

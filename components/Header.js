@@ -52,10 +52,10 @@ function Header() {
                     </div>
                 </div>
                 <div className="w-2/12 h-16 flex justify-center items-center">
-                    <img src={`${router.basePath}/assets/images/logo.svg`} className="w-16 h-16" />
+                    <img src={`${router.basePath}/assets/images/svg-edited.svg`} className="w-16 h-16" />
                 </div>
                 <div className="w-5/12 h-full flex justify-end items-center">
-                    <a href="/profile" className="w-8 md:w-10 h-8 md:h-10 flex justify-center items-center">
+                    <a href="/user/dashboard" className="w-8 md:w-10 h-8 md:h-10 flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-primary cursor-pointer">
                             <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
                         </svg>
@@ -74,11 +74,11 @@ function Header() {
                     </button>
                 </div>
             </div>
-            <div className="w-full h-auto flex flex-col sm:hidden justify-between items-center">
+            <div className="w-11/12 h-auto flex flex-col sm:hidden justify-between items-center mx-auto">
                 <div className="w-full h-14 flex flex-row sm:hidden justify-between items-center">
                     <Theme />
                     <div className="w-14 h-14 flex justify-center items-center">
-                        <img src={`${router.basePath}/assets/images/logo.svg`} className="w-full h-full" />
+                        <img src={`${router.basePath}/assets/images/svg-edited.svg`} className="w-full h-full" />
                     </div>
                     <button className="w-10 h-10 flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-primary">

@@ -3,18 +3,19 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import { useRouter } from "next/router";
 
-import { getCircularReplacer } from "../utils";
-import axiosClient from '../utils/axiosClient';
-import { wrapper } from '../redux/store'
+import { getCircularReplacer } from "../../utils";
+import axiosClient from '../../utils/axiosClient';
+import { wrapper } from '../../redux/store'
 
-import TextField from "../components/TextField";
-import UserPanelDrawer from "../components/UserPanelDrawer";
-import UserHeader from "../components/UserHeader";
-import Checkbox from '../components/Checkbox';
-import ProductItemContainer from '../components/ProductItemContainer';
+import TextField from "../../components/TextField";
+import UserPanelDrawer from "../../components/UserPanelDrawer";
+import UserHeader from "../../components/UserHeader";
+import Checkbox from '../../components/Checkbox';
+import ProductItemContainer from '../../components/ProductItemContainer';
 
 function ChangePassword({ token, res }) {
 
+    const [open, setOpen] = useState(false);
     const [currentPassword, setCurrentPassword] = useState('');
     const [password, setPassword] = useState('');
     const [composition, setComposition] = useState('0123456789abcdefghijklmnopqrstuvwxyz');
@@ -76,8 +77,8 @@ function ChangePassword({ token, res }) {
 
         const lowercaseScore = lowercase === null ? 0 : 5
         const uppercaseScore = uppercase === null ? 0 : 20
-        const numberScore = number === null ? 0 : 13
-        const minEightCharsScore = value.length < 12 ? value.length * 3 : 33
+        const numberScore = number === null ? 0 : lowercase === null ? 5 : 13
+        const minEightCharsScore = value.length < 8 ? value.length * 3 : 33
         const specialCharsScore = hasSpecialChars ? 30 : 0
 
         const passStrength = lowercaseScore + uppercaseScore + numberScore + minEightCharsScore + specialCharsScore
@@ -162,18 +163,18 @@ function ChangePassword({ token, res }) {
         if (password && checkMatchPassword) {
             const result = await axiosClient.put('/user', { password }, {
                 headers: {
-                    Authorization: 'Bearer ' + token
+                    Authorization: token
                 }
             })
             if (result.status === 202) {
-                router.push('/profile')
+                router.push('/user/profile')
             }
         }
     }
 
     return (
         <div className="w-full h-auto flex dark:bg-gray-800 transition-all bg-slate-300/10">
-            <UserPanelDrawer open={true} />
+            <UserPanelDrawer open={open} onChangeState={() => { setOpen(!open) }} />
             <div className="w-full h-auto pl-2 dark:bg-gray-800 transition-all">
                 <UserHeader />
                 <div style={{ width: '98%', height: 'auto' }} className="border mx-auto mt-px dark:border-gray-600 rounded shadow-sm dark:shadow-slate-600">
@@ -361,7 +362,7 @@ function ChangePassword({ token, res }) {
                                 </div>
                             </section>
                         </div>
-                        <div className="w-11/12 mx-auto sm:mx-0 h-11 flex justify-center sm:justify-end mt-16 md:mr-16">
+                        <div className="w-11/12 mx-auto sm:mx-0 h-11 flex justify-center sm:justify-end mt-14 md:mr-16">
                             <button className="w-full msm:w-40 h-10 mx-auto lg:ml-0 backdrop-blur-2xl outline-none bg-primary dark:bg-primary/75 border dark:border-slate-600 rounded md:dark:shadow-slate-700/20 md:shadow-[0_2px_4px_rgba(0,0,0,0.1)] py-1 px-4 text-white dark:text-gray-300 text-semi-small font-medium md:mx-2 md:before:content-[''] md:before:w-0 md:before:h-0 md:hover:before:w-40 md:hover:before:h-10 md:before:duration-300 md:before:rounded md:before:transition-all before:absolute before:bottom-0 before:left-0 md:hover:before:bg-white before:-z-10 md:hover:border-primary md:hover:text-primary dark:hover:before:bg-slate-800/10"
                                 onClick={() => { setCheckMatchPassword(password === repeatPassword); sendPassword() }}>
                                 تغییر رمز عبور
@@ -378,7 +379,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ctx 
     const { token } = ctx.req.cookies
     let res = await axiosClient.get('/user/me', {
         headers: {
-            Authorization: 'Bearer ' + token
+            Authorization: token
         },
     })
 

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { registerAction } from '../actions/registerAction';
 
 export const registerSlice = createSlice({
     name: 'register',
@@ -7,13 +8,14 @@ export const registerSlice = createSlice({
         email: '',
     },
     reducers: {},
-    extraReducers: {
-        __SET_EMAIL__: (state, action) => {
+    extraReducers: builder => {
+        builder.addCase(registerAction, (state, action) => {
             state.email = action.payload.email
-        },
-        [HYDRATE]: (state, action) => {
+            return state
+        }).addCase(HYDRATE, (state, action) => {
             state.email = ''
-        }
+            return state
+        }).addDefaultCase((state, action) => { })
     }
 })
 

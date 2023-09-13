@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import UserHeader from '../components/UserHeader';
-import UserPanelDrawer from "../components/UserPanelDrawer";
-import TextField from "../components/TextField";
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from "../components/Table";
-import Modal from '../components/Modal';
+import UserHeader from '../../components/UserHeader';
+import UserPanelDrawer from "../../components/UserPanelDrawer";
+import TextField from "../../components/TextField";
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from "../../components/Table";
+import Modal from '../../components/Modal';
 
 function Users() {
 

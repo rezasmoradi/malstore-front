@@ -1,19 +1,23 @@
-import React from "react";
-import UserPanelDrawer from "../components/UserPanelDrawer";
-import UserHeader from '../components/UserHeader';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '../components/Table';
-import TextField from '../components/TextField';
+import React, { useState } from "react";
+import UserPanelDrawer from "../../../../components/UserPanelDrawer";
+import UserHeader from '../../../../components/UserHeader';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '../../../../components/Table';
+import TextField from '../../../../components/TextField';
+import { useRouter } from "next/router";
 
 function ProductsList() {
-    
+
+    const router = useRouter()
+    const [open, setOpen] = useState(false)
+
     return (
         <div className="w-full h-full flex dark:bg-gray-800 transition-all">
-            <UserPanelDrawer open={false} />
+            <UserPanelDrawer open={open} onChangeState={() => { setOpen(!open) }} />
             <div className="w-full h-full msm:pl-2 bg-white dark:bg-gray-800 transition-all overflow-hidden">
                 <UserHeader />
                 <div className="w-full h-auto">
                     <div className="w-full h-auto sm:h-16 flex flex-col sm:flex-row justify-around items-center my-2">
-                        <button className="w-auto h-9 md:h-10 mt-3 px-3 py-2 bg-transparent flex flex-row justify-around items-center text-gray-800 dark:text-gray-300 border border-primary rounded outline-none">
+                        <button onClick={() => { router.push(`${router.asPath}/new/primary`) }} className="w-auto h-9 md:h-10 mt-3 px-3 py-2 bg-transparent flex flex-row justify-around items-center text-gray-800 dark:text-gray-300 border border-primary rounded outline-none">
                             <span className="px-1 text-sm md:text-base">ثبت محصول جدید</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 md:w-6 h-5 md:h-6">
                                 <path fillRule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clipRule="evenodd" />

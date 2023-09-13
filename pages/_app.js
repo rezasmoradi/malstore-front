@@ -1,15 +1,22 @@
-import React from 'react';
-import { wrapper } from '../redux/store';
-import { Provider } from 'react-redux';
-import { Router } from 'next/router';
+import React from 'react'
+import { wrapper } from '../redux/store'
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import { Router } from 'next/router'
 
-import '../styles/globals.css';
-import '../styles/fontiran.css';
-import '../styles/style.css';
+import '../styles/globals.css'
+import '../styles/fontiran.css'
 
-function MyApp({ Component, pageProps }) {
+import { changeColorThemeAction } from '../redux/actions/userAction'
+import 'react-toastify/dist/ReactToastify.css'
+import '../styles/style.css'
 
-  const [loading, setLoading] = React.useState(false);
+function App({ Component, pageProps }) {
+
+  const { store, props } = wrapper.useWrappedStore(pageProps)
+
+  const [loading, setLoading] = React.useState(false)
+  const theme = store.getState().user.theme;
+
   React.useEffect(() => {
     const start = () => {
       console.log("start");
@@ -27,23 +34,29 @@ function MyApp({ Component, pageProps }) {
       Router.events.off("routeChangeComplete", end);
       Router.events.off("routeChangeError", end);
     };
-  }, []);
+  }, [])
 
   React.useEffect(() => {
-    if (localStorage.getItem('theme') === null) {
+    const appTheme = localStorage.getItem('theme')
+    if (appTheme === null) {
       localStorage.setItem('theme', 'light');
     }
-    if (localStorage.getItem('theme') === 'dark') {
+    if (appTheme === 'dark') {
       document.documentElement.classList.add('dark');
     }
-  }, []);
+    if (appTheme !== theme) {
+      store.dispatch(changeColorThemeAction(appTheme));
+    }
+  }, [])
 
   return (<>
     {loading ? (
       <h1>LOADING</h1>
     ) :
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     }</>)
 }
 
-export default wrapper.withRedux(MyApp);
+export default App

@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'msm': '350px',
-        'xsm': { 'min': '350px', 'max': '639px' },
+        'msm': { 'min': '320px', 'max': '419px' },
+        'xsm': { 'min': '420px', 'max': '639px' },
       },
       width: {
         '18': '4.5rem',
@@ -31,7 +31,9 @@ module.exports = {
         '2xs': '0.625rem'
       },
       colors: {
+        dark: 'rgb(51 65 85)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(253,186,116)',
       },
       keyframes: {
         raise: {
@@ -136,8 +138,8 @@ module.exports = {
         growWidth: 'growWidth 7s linear',
         slideDown: 'slideDown 0.4s ease-out',
         slideTop: 'slideTop 0.4s ease-out',
-        slideTopSelect: 'slideTopSelect 0.15s linear',
-        slideDownSelect: 'slideDownSelect 0.15s linear',
+        slideTopSelect: 'slideTopSelect 0.12s linear',
+        slideDownSelect: 'slideDownSelect 0.12s linear',
         slideFromLeft: 'slideFromLeft 1s linear',
       },
       boxShadow: {

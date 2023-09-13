@@ -11,7 +11,7 @@ function Drawer({ children, size, onClick, onBlur, open = false }) {
     }, [drawerRef.current]);
 
     return (
-        <aside ref={drawerRef} className={`${open ? width : 'w-0'} transition-all float-right clear-right duration-300 bg-inherit fixed z-50 md:z-auto md:relative h-full backdrop-blur-xl`} onBlur={onBlur}>
+        <aside ref={drawerRef} style={{ zIndex: 99999 }} className={`${open ? width : 'w-0'} transition-all duration-300 bg-inherit fixed sm:relative z-50 md:z-auto right-0 h-full backdrop-blur-xl`} onBlur={onBlur}>
             <button onClick={onClick} className={"absolute z-10 top-6 -left-4"}>
                 {open ?
                     <span className="absolute border-r-2 border-slate-300 rounded-full -left-1 bg-white outline-none">
